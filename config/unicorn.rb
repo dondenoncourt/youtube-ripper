@@ -1,3 +1,9 @@
+# build from the unicorn section in:
+#   http://sirupsen.com/setting-up-unicorn-with-nginx/
+#   but instead of
+#   $ curl -o config/unicorn.rb https://raw.github.com/defunkt/unicorn/master/examples/unicorn.conf.rb
+#   I manually copied the unicorn.conf.rb to the local unicorn.rb
+
 # Sample verbose configuration file for Unicorn (not Rack)
 #
 # This configuration file documents many features of Unicorn

@@ -1,3 +1,5 @@
+require 'aws-sdk'
+
 class RipperController < ApplicationController
   protect_from_forgery except: :create
 
@@ -6,7 +8,6 @@ class RipperController < ApplicationController
   end
 
   # GET /ripper/1
-  # GET /ripper/1.json
   def show
     render text: "get show request #{params[:id]}"
   end
@@ -22,25 +23,26 @@ class RipperController < ApplicationController
     render text: "get edit request #{params[:id]}"
   end
 
-  # POST /ripper
-  # POST /ripper.json
+  # POST /ripper/:youtube_id
   def create
-    # TODO add specific path
-    # String download_dir = new File(".").getAbsolutePath().replaceAll(/\.$/,'')+"target/"
-    # String download_template = download_dir+'%(title)s-%(id)s.%(ext)s'
-    # def proc = "youtube-dl -o ${download_template} ${url}".execute()
-    system("youtube-dl -t https://www.youtube.com/watch?v=#{params[:id]}")
+    download_template = Dir.pwd+'/tmp/%(id)s.%(ext)s'
+    system("youtube-dl -o '#{download_template}' https://www.youtube.com/watch?v=#{params[:id]}")
+    # TODO figure out the explicit file name so we have the suffix
+    s3 = AWS::S3.new
+    bucket = s3.buckets['jukinvideo_unit_tests']
+    bucket.objects[params[:id]].write(Pathname.new("#{Dir.pwd}/tmp/#{params[:id]}.mp4"))
+    # bucket.objects['key'].write('Pathname.new("#{Dir.pwd}/tmp/#{params[:id]}.mp4")')
+    # TODO exception block and delete youtube download -- if no exception on S3 write
+
     render text: 'post request'
   end
 
   # PUT /ripper/1
-  # PUT /ripper/1.json
   def update
     render text: 'put request #{params[:id]}'
   end
 
   # DELETE /ripper/1
-  # DELETE /ripper/1.json
   def destroy
     render text: 'delete request #{params[:id]}'
   end

@@ -11,10 +11,13 @@ It provides facilities to download YouTube videos (via the youtube-dl command)
 
 To configure:
  - Build an EC2 Ruby instance
+ - $ sudo gem install rails -v 4.1.4
+ - $ sudo bundle install
  - $ sudo apt-get install youtube-dl
  - $ youtube-dl -U
- - $ sudo gem install rails -v 4.1.4
+ - copy config/nginx.conf to the /etc/nginx/ directory
+ - may need to install a javascript compiler
 
 == START SERVER ==
- - $ sudo unicorn_rails -c /var/www/unicorn_test/config/unicorn.rb -D
  - $ sudo service nginx start|restart
+ - $ sudo unicorn_rails -c /var/www/unicorn_test/config/unicorn.rb -D

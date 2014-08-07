@@ -18,7 +18,3 @@ To configure:
 == START SERVER ==
  - $ sudo unicorn_rails -c /var/www/unicorn_test/config/unicorn.rb -D
  - $ sudo service nginx start|restart
-
-
-
-

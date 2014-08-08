@@ -41,7 +41,7 @@ class RipperController < ApplicationController
       s3 = AWS::S3.new
       bucket = s3.buckets[params[:bucket_name]] # 'jukinvideo_unit_tests'
       if !bucket.exists?
-        raise ArgumentError, "#{params[:bucket_name]} does not exist"
+        raise ArgumentError, "S3 bucket called #{params[:bucket_name]} does not exist"
       end
       bucket.objects[filename].write(Pathname.new("#{Dir.pwd}/tmp/#{filename}"))
       render json: "#{filename} uploaded to S3 in #{params[:bucket_name]}"

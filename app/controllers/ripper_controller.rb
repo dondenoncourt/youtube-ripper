@@ -44,6 +44,7 @@ class RipperController < ApplicationController
         raise ArgumentError, "S3 bucket called #{params[:bucket_name]} does not exist"
       end
       bucket.objects[filename].write(Pathname.new("#{Dir.pwd}/tmp/#{filename}"))
+      File.delete "#{Dir.pwd}/tmp/#{filename}"
       render json: "#{filename} uploaded to S3 in #{params[:bucket_name]}"
     rescue Exception => e
       logger.info e.to_s

@@ -1,4 +1,5 @@
 require 'aws-sdk'
+require 'open3'
 
 class RipperController < ApplicationController
   protect_from_forgery except: :create
@@ -23,18 +24,28 @@ class RipperController < ApplicationController
     render text: "get edit request #{params[:id]}"
   end
 
-  # POST /ripper/:youtube_id
+  # POST /ripper/:youtube_id/:bucket_name
   def create
     download_template = Dir.pwd+'/tmp/%(id)s.%(ext)s'
-    system("youtube-dl -o '#{download_template}' https://www.youtube.com/watch?v=#{params[:id]}")
-    # TODO figure out the explicit file name so we have the suffix
-    s3 = AWS::S3.new
-    bucket = s3.buckets['jukinvideo_unit_tests']
-    bucket.objects[params[:id]].write(Pathname.new("#{Dir.pwd}/tmp/#{params[:id]}.mp4"))
-    # bucket.objects['key'].write('Pathname.new("#{Dir.pwd}/tmp/#{params[:id]}.mp4")')
-    # TODO exception block and delete youtube download -- if no exception on S3 write
-
-    render text: 'post request'
+    begin
+      # note, streaming std/err out is possible and explained in  http://blog.bigbinary.com/2012/10/18/backtick-system-exec-in-ruby.html
+      Open3.popen3("youtube-dl -o '#{download_template}' https://www.youtube.com/watch?v=#{params[:youtube_id]}") do |stdin, stdout, stderr, wait_thr|
+        logger.info "stdout: #{stdout.read}"
+        standard_error = stderr.read
+        if standard_error.size > 0
+          raise ArgumentError, standard_error
+        end
+      end
+      # get the generated file name so we upload to S3 with the correct suffix
+      filename = Dir.entries(Pathname.new("#{Dir.pwd}/tmp")).select {|f| !File.directory?(f) && f =~ /#{params[:youtube_id]}/}[0]
+      s3 = AWS::S3.new
+      bucket = s3.buckets[params[:bucket_name]] # 'jukinvideo_unit_tests'
+      bucket.objects[filename].write(Pathname.new("#{Dir.pwd}/tmp/#{filename}"))
+      render json: "#{filename} uploaded to S3 in #{params[:bucket_name]}"
+    rescue Exception => e
+      puts e.to_s
+      render json: {error: 'internal-server-error', exception: "#{e.class.name} : #{e.message}"}, status: 422
+    end
   end
 
   # PUT /ripper/1

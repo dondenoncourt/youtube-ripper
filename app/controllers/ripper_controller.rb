@@ -45,7 +45,7 @@ class RipperController < ApplicationController
       end
       bucket.objects[filename].write(Pathname.new("#{Dir.pwd}/tmp/#{filename}"))
       File.delete "#{Dir.pwd}/tmp/#{filename}"
-      render json: "#{filename} uploaded to S3 in #{params[:bucket_name]}"
+      render json: {success: "#{filename} uploaded to S3 in #{params[:bucket_name]}"}
     rescue Exception => e
       logger.info e.to_s
       render json: {error: 'internal-server-error', exception: "#{e.class.name} : #{e.message}"}, status: 422

@@ -40,10 +40,13 @@ class RipperController < ApplicationController
       filename = Dir.entries(Pathname.new("#{Dir.pwd}/tmp")).select {|f| !File.directory?(f) && f =~ /#{params[:youtube_id]}/}[0]
       s3 = AWS::S3.new
       bucket = s3.buckets[params[:bucket_name]] # 'jukinvideo_unit_tests'
+      if !bucket.exists?
+        raise ArgumentError, "#{params[:bucket_name]} does not exist"
+      end
       bucket.objects[filename].write(Pathname.new("#{Dir.pwd}/tmp/#{filename}"))
       render json: "#{filename} uploaded to S3 in #{params[:bucket_name]}"
     rescue Exception => e
-      puts e.to_s
+      logger.info e.to_s
       render json: {error: 'internal-server-error', exception: "#{e.class.name} : #{e.message}"}, status: 422
     end
   end

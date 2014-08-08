@@ -16,5 +16,6 @@
 /tmp
 
 /.idea/dataSources.*
+/.idea
 
 .DS_Store

@@ -13,14 +13,16 @@ To configure:
  - Build an EC2 Ruby instance
  - $ sudo gem install rails -v 4.1.4
  - $ sudo bundle install
+ - $ sudo apt-get install nodejs
  - $ sudo apt-get install youtube-dl
  - $ youtube-dl -U
- - copy config/nginx.conf to the /etc/nginx/ directory
- - may need to install a javascript compiler
+ - cp /srv/www/ripper_server/current/config/nginx.conf /etc/nginx/
+ - manually edit the empty /srv/www/ripper_server/current/config/database.yml and paste in the full code
+ - fix that with http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-rails.html#workinglayers-rails-db
 
 == START SERVER ==
  - $ sudo service nginx start|restart
- - $ sudo unicorn_rails -c /srv/www/jukin-ripper/config/unicorn.rb -D
+ - $ sudo unicorn_rails -c /srv/www/ripper_server/current/config/unicorn.rb -D
  
 == STOP SERVER ==
  - $ sudo service nginx stop

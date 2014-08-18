@@ -11,13 +11,14 @@ It provides facilities to download YouTube videos (via the youtube-dl command)
 
 To configure:
  - Build an EC2 Ruby instance
+ - check the next two steps
  - $ sudo gem install rails -v 4.1.4
  - $ sudo bundle install
  - $ sudo apt-get install nodejs
  - $ sudo apt-get install youtube-dl
  - $ youtube-dl -U
  - cp /srv/www/ripper_server/current/config/nginx.conf /etc/nginx/
- - manually edit the empty /srv/www/ripper_server/current/config/database.yml and paste in the full code
+ - the current/config/database.yml is empty so paste in the full code from your local PC
  - fix that with http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-rails.html#workinglayers-rails-db
 
 == START SERVER ==

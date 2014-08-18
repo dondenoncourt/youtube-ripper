@@ -15,12 +15,12 @@ To configure:
  - cp /srv/www/ripper_server/current/config/nginx.conf /etc/nginx/
 
 == START SERVER ==
- - $ sudo service nginx start|restart
- - $ sudo unicorn_rails -c /srv/www/ripper_server/current/config/unicorn.rb -D
+ - $ service nginx start|restart
+ - $ unicorn_rails -c /srv/www/ripper_server/current/config/unicorn.rb -D
  
 == STOP SERVER ==
- - $ sudo service nginx stop
- - $ sudo pkill unicorn_rails
+ - $ service nginx stop
+ - $ pkill unicorn_rails
  
  
  == OpsWorks

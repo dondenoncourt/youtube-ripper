@@ -11,11 +11,8 @@ It provides facilities to download YouTube videos (via the youtube-dl command)
 
 To configure:
  - Build an EC2 Ruby instance
- - youtube-dl will be installed you you need to do the following before calls work:
- - $ youtube-dl -U
  - specify the rails server in the nginx config:
  - cp /srv/www/ripper_server/current/config/nginx.conf /etc/nginx/
- - the current/config/database.yml is empty so paste in the full code from your local PC or do the following:
 
 == START SERVER ==
  - $ sudo service nginx start|restart

@@ -16,10 +16,6 @@ To configure:
  - specify the rails server in the nginx config:
  - cp /srv/www/ripper_server/current/config/nginx.conf /etc/nginx/
  - the current/config/database.yml is empty so paste in the full code from your local PC or do the following:
- - cp /srv/www/ripper_server/shared/config/database.yml /srv/www/ripper_server/current/config/
- - or
- - cp /srv/www/ripper_server/shared/cached-copy/config/database.yml /srv/www/ripper_server/current/config/
- - fix that with http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-rails.html#workinglayers-rails-db
 
 == START SERVER ==
  - $ sudo service nginx start|restart

@@ -11,14 +11,14 @@ It provides facilities to download YouTube videos (via the youtube-dl command)
 
 To configure:
  - Build an EC2 Ruby instance
- - check the next two steps
- - $ sudo gem install rails -v 4.1.4
- - $ sudo bundle install
- - $ sudo apt-get install nodejs
- - $ sudo apt-get install youtube-dl
+ - youtube-dl will be installed you you need to do the following before calls work:
  - $ youtube-dl -U
+ - specify the rails server in the nginx config:
  - cp /srv/www/ripper_server/current/config/nginx.conf /etc/nginx/
- - the current/config/database.yml is empty so paste in the full code from your local PC
+ - the current/config/database.yml is empty so paste in the full code from your local PC or do the following:
+ - cp /srv/www/ripper_server/shared/config/database.yml /srv/www/ripper_server/current/config/
+ - or
+ - cp /srv/www/ripper_server/shared/cached-copy/config/database.yml /srv/www/ripper_server/current/config/
  - fix that with http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-rails.html#workinglayers-rails-db
 
 == START SERVER ==
@@ -31,7 +31,6 @@ To configure:
  
  
  == OpsWorks
-  - problem with git install of jukin-ripper with sqlite3 so run below before deploying the app
-  - $ apt-get install zlib1g zlib1g-dev build-essential sqlite3 libsqlite3-dev openssl libssl-dev libyaml-dev libreadline-dev libxml2-dev libxslt1-dev
+  - add these: zlib1g zlib1g-dev build-essential sqlite3 libsqlite3-dev openssl libssl-dev libyaml-dev libreadline-dev libxml2-dev libxslt1-dev youtube-dl
   - should have used: $ rails new jukin-ripper --skip-active-record
 

@@ -111,8 +111,8 @@
       <file leaf-file-name="before_restart.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/deploy/before_restart.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17826825" vertical-offset="0" max-vertical-offset="589">
-              <caret line="7" column="47" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.20373514" vertical-offset="0" max-vertical-offset="589">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -946,8 +946,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/deploy/before_restart.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17826825" vertical-offset="0" max-vertical-offset="589">
-          <caret line="7" column="47" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.20373514" vertical-offset="0" max-vertical-offset="589">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>

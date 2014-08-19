@@ -6,4 +6,4 @@
 # this installs 1.5.2
 `gem install rack`
 # apache config Rails path needs /public suffix
-`sed -i "s/current$/current\\/public/g" /etc/apache2/sites-enabled/ripper_server.conf`
+#`sed -i "s/current$/current\\/public/g" /etc/apache2/sites-enabled/ripper_server.conf`

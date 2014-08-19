@@ -24,6 +24,5 @@ To configure:
  
  
  == OpsWorks
-  - add these: zlib1g zlib1g-dev build-essential sqlite3 libsqlite3-dev openssl libssl-dev libyaml-dev libreadline-dev libxml2-dev libxslt1-dev youtube-dl
-  - should have used: $ rails new jukin-ripper --skip-active-record
+  - add these: nodejs
 

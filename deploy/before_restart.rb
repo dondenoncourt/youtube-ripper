@@ -5,6 +5,5 @@
 `rm -Rf /usr/local/lib/ruby/gems/2.1.0/gems/rack-1.6.0.beta/`
 # this installs 1.5.2
 `gem install rack`
-# nginx
-#`cp /srv/www/ripper_server/current/config/nginx.conf /etc/nginx/`
-#`service nginx restart`
+# apache config Rails path needs /public suffix
+`sed -i "s/current$/current\\/public/g" /etc/apache2/sites-enabled/ripper_server.conf`

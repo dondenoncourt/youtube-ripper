@@ -14,7 +14,7 @@ def create_aws_yml(aws_keys, release_path)
   ::File.open(file_path, 'w') do |f|
     f.write("production:\n")
     aws_keys.each do |k,v|
-      f.write("  #{k}: #{v}\n")
+      f.write("  #{k}: '#{v}'\n")
     end
   end
 end

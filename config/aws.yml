@@ -1,8 +1,0 @@
-development: &default
-  access_key_id: 'AKIAJMQ5TKXQLCVL5HJA'
-  secret_access_key: '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'
-test:
-  <<: *default
-production:
-  <<: *default
-

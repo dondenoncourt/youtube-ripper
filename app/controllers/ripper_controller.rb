@@ -38,6 +38,8 @@ class RipperController < ApplicationController
       end
       # get the generated file name so we upload to S3 with the correct suffix
       filename = Dir.entries(Pathname.new("#{Dir.pwd}/tmp")).select {|f| !File.directory?(f) && f =~ /#{params[:youtube_id]}/}[0]
+puts "ENV['AWS_ACCESS_KEY_ID']: "+ENV['AWS_ACCESS_KEY_ID']
+puts "ENV['AWS_SECRET_ACCESS_KEY']: "+ENV['AWS_SECRET_ACCESS_KEY']
       s3 = AWS::S3.new
       bucket = s3.buckets[params[:bucket_name]] # 'jukinvideo_unit_tests'
       if !bucket.exists?

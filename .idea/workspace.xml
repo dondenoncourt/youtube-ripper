@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e91918c8-d24a-41ab-bbd7-df0bd42efd2a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config/nginx.conf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config/unicorn.rb" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config/aws.yml" afterPath="" />
     </list>
     <ignored path="jukin-ripper.iws" />
     <ignored path=".idea/workspace.xml" />

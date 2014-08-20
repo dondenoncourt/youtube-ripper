@@ -16,6 +16,10 @@ def create_aws_yml(aws_keys, release_path)
     aws_keys.each do |k,v|
       f.write("  #{k}: '#{v}'\n")
     end
+    f.write("development:\n")
+    aws_keys.each do |k,v|
+      f.write("  #{k}: '#{v}'\n")
+    end
   end
 end
 

@@ -8,10 +8,23 @@ Chef::Log.info("Running deploy/before_restart.rb")
 # this installs 1.5.2
 `gem install rack`
 
+def create_aws_yml(aws_keys, release_path)
+  Chef::Log.info("Creating aws.yml")
+  file_path = ::File.join(release_path, 'config/aws.yml')
+  ::File.open(file_path, 'w') do |f|
+    f.write("production:\n")
+    aws_keys.each do |k,v|
+      f.write("  #{k}: #{v}\n")
+    end
+  end
+end
+
+
 # map the environment_variables node to ENV
 node[:deploy].each do |application, deploy|
-  deploy[:environment_variables].each do |key, value|
-    Chef::Log.info("Setting ENV[#{key}] to #{value}")
-    ENV[key] = value
-  end
+  create_aws_yml(deploy[:aws_yml_keys], release_path)
+  # deploy[:environment_variables].each do |key, value|
+  #   Chef::Log.info("Setting ENV[#{key}] to #{value}")
+  #   ENV[key] = value
+  # end
 end

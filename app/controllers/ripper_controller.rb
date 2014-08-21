@@ -25,7 +25,9 @@ class RipperController < ApplicationController
   end
 
   # POST /ripper/:youtube_id/:bucket_name
+  # POST /ripper/:youtube_id/:bucket_name?no_audio=true
   def create
+puts params
     download_template = Dir.pwd+'/tmp/%(id)s.%(ext)s'
     begin
       # note, streaming std/err out is possible and explained in  http://blog.bigbinary.com/2012/10/18/backtick-system-exec-in-ruby.html
@@ -36,8 +38,21 @@ class RipperController < ApplicationController
           raise ArgumentError, standard_error
         end
       end
+
       # get the generated file name so we upload to S3 with the correct suffix
       filename = Dir.entries(Pathname.new("#{Dir.pwd}/tmp")).select {|f| !File.directory?(f) && f =~ /#{params[:youtube_id]}/}[0]
+      file_ext = File.extname(filename)
+
+      # if no_audio strip out sound tracks
+      if params[:no_audio] && params[:no_audio] == 'true'
+        ffmpeg = "ffmpeg -i tmp/#{params[:youtube_id]}#{file_ext} -vcodec copy -an -y tmp/#{params[:youtube_id]}_no_audio#{file_ext}"
+        logger.info ffmpeg
+        Open3.popen3(ffmpeg) do |stdin, stdout, stderr, wait_thr|
+          logger.info "stdout: #{stdout.read}"
+        end
+        File.delete "tmp/#{params[:youtube_id]}#{file_ext}"
+        File.rename "tmp/#{params[:youtube_id]}_no_audio#{file_ext}", "tmp/#{params[:youtube_id]}#{file_ext}"
+      end
       s3 = AWS::S3.new
       bucket = s3.buckets[params[:bucket_name]] # 'jukinvideo_unit_tests'
       if !bucket.exists?

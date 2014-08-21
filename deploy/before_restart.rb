@@ -24,11 +24,8 @@ def create_aws_yml(aws_keys, release_path)
 end
 
 
-# map the environment_variables node to ENV
+# build aws.yml from OpsWorks stack custom JSON e.g.
+# { "deploy": { "ripper_server": { "aws_yml_keys": { "access_key_id": "donttellanyone", "secret_access_key": "evenyourmother" } } } }
 node[:deploy].each do |application, deploy|
   create_aws_yml(deploy[:aws_yml_keys], release_path)
-  # deploy[:environment_variables].each do |key, value|
-  #   Chef::Log.info("Setting ENV[#{key}] to #{value}")
-  #   ENV[key] = value
-  # end
 end

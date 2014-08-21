@@ -9,20 +9,10 @@ It provides facilities to download YouTube videos (via the youtube-dl command)
 
 == CONFIGURE ON A NEW SERVER ==
 
-To configure:
- - Build an EC2 Ruby instance
- - specify the rails server in the nginx config:
- - cp /srv/www/ripper_server/current/config/nginx.conf /etc/nginx/
-
-== START SERVER ==
- - $ service nginx start|restart
- - $ unicorn_rails -c /srv/www/ripper_server/current/config/unicorn.rb -D
- 
-== STOP SERVER ==
- - $ service nginx stop
- - $ pkill unicorn_rails
- 
- 
- == OpsWorks
-  - add these: nodejs
+== OpsWorks OS Packages
+ - add ffmpeg
+  
+== Testing
+ - there is only one controller in this app so just use:
+ - rake test TEST=test/controllers/ripper_controller_test.rb
 

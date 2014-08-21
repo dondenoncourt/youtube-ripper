@@ -6,6 +6,11 @@ class RipperControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "post with valid youtube id and bucket name and no audio should be successful" do
+    post :create, {youtube_id: 'YQjrz23DUuA', bucket_name: 'jukinvideo_unit_tests', no_audio: 'true'}
+    assert_response :success
+  end
+
   test "post with invalid youtube id should fail" do
     post :create, {youtube_id: 'bogus', bucket_name: 'jukinvideo_unit_tests'}, json: true
     json = ActiveSupport::JSON.decode @response.body

@@ -54,7 +54,7 @@ puts params
         File.rename "tmp/#{params[:youtube_id]}_no_audio#{file_ext}", "tmp/#{params[:youtube_id]}#{file_ext}"
       end
       s3 = AWS::S3.new
-      bucket = s3.buckets[params[:bucket_name]] # 'jukinvideo_unit_tests'
+      bucket = s3.buckets[params[:bucket_name]] # 'youtubevideo_unit_tests'
       if !bucket.exists?
         raise ArgumentError, "S3 bucket called #{params[:bucket_name]} does not exist"
       end

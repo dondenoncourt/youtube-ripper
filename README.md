@@ -1,7 +1,7 @@
-jukin-ripper
+youtube-ripper
 ============
 
-Jukin Media Ripper
+YouTube Video Ripper
 
 This is the Readme for the RESTful Video Ripper services
 It provides facilities to download YouTube videos (via the youtube-dl command)

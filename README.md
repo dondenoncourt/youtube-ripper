@@ -3,7 +3,7 @@ jukin-ripper
 
 Jukin Media Ripper
 
-This is the Readme for the Jukin Media's RESTful Video Ripper services
+This is the Readme for the RESTful Video Ripper services
 It provides facilities to download YouTube videos (via the youtube-dl command)
 
 
